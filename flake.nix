@@ -42,7 +42,7 @@
     # basic flake output
     inherit overlays;
     myOverlays = overlays;
-  } // flake-utils.lib.eachDefaultSystem (system: let
+  } // (flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs {
       inherit system;
       inherit overlays;
@@ -80,5 +80,5 @@
         exec zsh
       '';
     };
-  });
+  }));
 }
