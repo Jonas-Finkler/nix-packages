@@ -20,7 +20,7 @@
     # deepClone = true;
   };
   
-  buildInputs = with [
+  buildInputs = [
     setuptools
   ];
 
