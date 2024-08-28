@@ -10,7 +10,11 @@
 }: stdenv.mkDerivation {
   pname = "fhi-aims";
   version = "22/03/22";
-  src = ./fhi-aims.210716_3.tgz;
+  src = builtins.fetchGit {
+    url = "git@github.com:Jonas-Finkler/fhiaims.210716_3.git";
+    ref = "main";
+    rev = "3dc9823a88c57fa3d63e14abd1463477a26ab017";
+  };
 
   nativeBuildInputs = [
     cmake

@@ -6,7 +6,12 @@
 }: stdenv.mkDerivation {
   pname = "RuNNer";
   version = "fcf5d7e3";
-  src = ./RuNNer.tgz;
+  
+  src = builtins.fetchGit {
+    url = "git@github.com:Jonas-Finkler/RuNNer.git";
+    ref = "master";
+    rev = "fcf5d7e322cc10e32705151591e36784a3915a23";
+  };
 
   preConfigure = ''
     cd src-devel
