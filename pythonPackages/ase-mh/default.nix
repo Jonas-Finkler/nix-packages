@@ -23,6 +23,14 @@
     # deepClone = true;
   };
   format = "pyproject";
+
+  # not sure why these strange versions are required. 
+  prePatch = ''
+    substituteInPlace setup.py \
+      --replace "ase<3.23" "ase>=3.2"
+    substituteInPlace setup.py \
+      --replace "spglib==2.4.0" "spglib>=2.4.0"
+  '';
   
   buildInputs = [
   ];

@@ -47,7 +47,7 @@
   '';
 
   cmakeFlags = [
-mpilers
+    # GNU Compilers
     "-DCMAKE_Fortran_COMPILER=mpif90"
     "-DCMAKE_C_COMPILER=gcc"
     "-DUSE_MPI=ON"
