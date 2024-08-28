@@ -37,49 +37,47 @@
       })
     ];
 
-
   in { 
     # basic flake output
     inherit overlays;
-    myOverlays = overlays;
-  };
-  # // (flake-utils.lib.eachDefaultSystem (system: let
-  #   pkgs = import nixpkgs {
-  #     inherit system;
-  #     inherit overlays;
-  #   };
-  # in {
-  #   # system specific output
-  #   packages = with pkgs; { 
-  #     inherit fhiaims; 
-  #     inherit runner;
-  #     inherit kim-api;
-  #     inherit mrchem;
-  #   };
-  #   # defaultPackage = xxx;
 
-  #   # for testing that everything compiles
-  #   devShells.default = pkgs.mkShell {
-  #     buildInputs = with pkgs; [ 
-  #       fhiaims
-  #       runner
-  #       kim-api
-  #       mrchem
-  #       (python311.withPackages (p: with p; [
-  #         sqnm
-  #         sirius-python-interface
-  #         ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-  #         kimpy
-  #       ]))
-  #     ];
+  } // (flake-utils.lib.eachDefaultSystem (system: let
+    pkgs = import nixpkgs {
+      inherit system;
+      inherit overlays;
+    };
+  in {
+    # system specific output
+    packages = with pkgs; { 
+      inherit fhiaims; 
+      inherit runner;
+      inherit kim-api;
+      inherit mrchem;
+    };
+    # defaultPackage = xxx;
 
-  #     shellHook = ''
-  #       export FLAKE="Jonas nixpkgs test shell"
-  #       # OMP
-  #       export OMP_NUM_THREADS=4
-  #       # back to zsh
-  #       exec zsh
-  #     '';
-  #   };
-  # }));
+    # for testing that everything compiles
+    devShells.default = pkgs.mkShell {
+      buildInputs = with pkgs; [ 
+        fhiaims
+        runner
+        kim-api
+        mrchem
+        (python311.withPackages (p: with p; [
+          sqnm
+          sirius-python-interface
+          ase-mh # there are some issues with the new ase version -> BE CAREFUL!
+          kimpy
+        ]))
+      ];
+
+      shellHook = ''
+        export FLAKE="Jonas nixpkgs test shell"
+        # OMP
+        export OMP_NUM_THREADS=4
+        # back to zsh
+        exec zsh
+      '';
+    };
+  }));
 }
