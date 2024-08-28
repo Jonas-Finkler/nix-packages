@@ -23,7 +23,7 @@
       kimpy = python.callPackage ./pythonPackages/kimpy {};
     };
 
-    overlays = [
+    myOverlays = [
       (final: prev: 
         # normal packages
         (myPackages final) // {
@@ -36,6 +36,8 @@
         };
       })
     ];
+
+    overlays = myOverlays;
 
   in { 
     # basic flake output
