@@ -23,7 +23,7 @@
       kimpy = python.callPackage ./pythonPackages/kimpy {};
     };
 
-    myOverlays = [
+    overlays = [
       (final: prev: 
         # normal packages
         (myPackages final) // {
@@ -37,11 +37,11 @@
       })
     ];
 
-    overlays = myOverlays;
 
   in { 
     # basic flake output
     inherit overlays;
+    myOverlays = overlays;
   } // flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs {
       inherit system;
