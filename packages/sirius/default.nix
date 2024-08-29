@@ -103,7 +103,7 @@
   ] ++ lib.optionals (gpuBackend == "cuda") [
     "-DSIRIUS_USE_CUDA=ON"
     "-DCMAKE_CUDA_ARCHITECTURES='70;72;75;80'" # Volta (70, 72), Turing (75), Ampere (80)
-    "-DSIRIUS_USE_MEMORY_POOL=OFF"             # Trying to disable this because umpire throws errors (might be worth compiling umpire with CUDA?)
+    # "-DSIRIUS_USE_MEMORY_POOL=OFF"             # Trying to disable this because umpire throws errors (might be worth compiling umpire with CUDA?)
     "-DCUDA_TOOLKIT_ROOT_DIR=${cudaPackages.cudatoolkit}"
   ] ++ lib.optionals (gpuBackend == "rocm") [
     "-DSIRIUS_USE_ROCM=ON"
