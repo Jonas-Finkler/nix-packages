@@ -15,6 +15,7 @@
       xcfun = pkgs.callPackage ./packages/xcfun {};
       mrchem = pkgs.callPackage ./packages/mrchem {};
       sirius = pkgs.callPackage ./packages/sirius {};
+      umpire = pkgs.callPackage ./packages/umpire {};
     };
 
     myPythonPackages = pkgs: python: {
@@ -61,6 +62,7 @@
       inherit kim-api;
       inherit mrchem;
       inherit sirius;
+      inherit umpire;
     };
     # defaultPackage = xxx;
 
