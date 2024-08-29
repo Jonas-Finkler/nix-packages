@@ -102,6 +102,7 @@
     "-DSIRIUS_BUILD_TESTING=ON"
   ] ++ lib.optionals (gpuBackend == "cuda") [
     "-DSIRIUS_USE_CUDA=ON"
+    "-DCMAKE_CUDA_ARCHITECTURES='70;72;75;80'" # Volta (70, 72), Turing (75), Ampere (80)
     "-DCUDA_TOOLKIT_ROOT_DIR=${cudaPackages.cudatoolkit}"
   ] ++ lib.optionals (gpuBackend == "rocm") [
     "-DSIRIUS_USE_ROCM=ON"
