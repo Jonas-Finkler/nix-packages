@@ -31,6 +31,7 @@
   buildInputs = [ 
   ] ++ lib.optionals (gpuBackend == "cuda") [
     cudaPackages.cudatoolkit
+    cudaPackages.cuda_cudart
   ];
 
   cmakeFlags = [
