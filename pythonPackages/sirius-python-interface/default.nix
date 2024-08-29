@@ -7,7 +7,6 @@
   mpi4py,
   numpy,
   ase,
-  h5py,
 }: buildPythonPackage {
   pname = "sirius-python-interface";
   version = "5aee8e5";
@@ -28,7 +27,6 @@
     mpi4py
     numpy
     ase
-    h5py
     sqnm
     sirius
   ];

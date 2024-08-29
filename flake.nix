@@ -14,25 +14,32 @@
       mrcpp = pkgs.callPackage ./packages/mrcpp {};
       xcfun = pkgs.callPackage ./packages/xcfun {};
       mrchem = pkgs.callPackage ./packages/mrchem {};
+      sirius = pkgs.callPackage ./packages/sirius {};
     };
 
-    myPythonPackages = python: {
+    myPythonPackages = pkgs: python: {
       sqnm = python.callPackage ./pythonPackages/sqnm {};
-      sirius-python-interface = python.callPackage ./pythonPackages/sirius-python-interface {};
       ase-mh = python.callPackage ./pythonPackages/ase-mh {};
       kimpy = python.callPackage ./pythonPackages/kimpy {};
+      sirius = python.toPythonModule (pkgs.sirius.override {
+        enablePython = true; 
+        pythonPackages = python.pythonPackages;
+      });
+      sirius-python-interface = python.callPackage ./pythonPackages/sirius-python-interface {};
     };
 
     overlays = [
+      # normal packages
       (final: prev: 
-        # normal packages
-        (myPackages final) // {
-        # python packages
+        (myPackages final)
+      )
+      # python packages
+      (final: prev: {
         python311 = prev.python311.override {
-          packageOverrides = python-self: python-super: (myPythonPackages python-self);
+          packageOverrides = python-self: python-super: (myPythonPackages final python-self);
         };
         python312 = prev.python312.override {
-          packageOverrides = python-self: python-super: (myPythonPackages python-self);
+          packageOverrides = python-self: python-super: (myPythonPackages final python-self);
         };
       })
     ];
@@ -53,21 +60,23 @@
       inherit runner;
       inherit kim-api;
       inherit mrchem;
+      inherit sirius;
     };
     # defaultPackage = xxx;
 
     # for testing that everything compiles
     devShells.default = pkgs.mkShell {
       buildInputs = with pkgs; [ 
-        fhiaims
-        runner
-        kim-api
-        mrchem
+        # fhiaims
+        # runner
+        # kim-api
+        # mrchem
+        # sirius
         (python311.withPackages (p: with p; [
-          sqnm
+          # sqnm
+          # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
+          # kimpy
           sirius-python-interface
-          ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-          kimpy
         ]))
       ];
 
