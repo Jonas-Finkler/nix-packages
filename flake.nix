@@ -53,6 +53,11 @@
     pkgs = import nixpkgs {
       inherit system;
       inherit overlays;
+      # config = {
+      #   allowUnfree = true;
+      #   cudaSupport = true;
+      #   cudaVersion = "12.6.0-v100";
+      # };
     };
   in {
     # system specific output
@@ -74,6 +79,7 @@
         # kim-api
         # mrchem
         # sirius
+        # umpire
         (python311.withPackages (p: with p; [
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
