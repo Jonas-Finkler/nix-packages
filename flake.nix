@@ -43,6 +43,8 @@
           packageOverrides = python-self: python-super: (myPythonPackages final python-self);
         };
       })
+      # lammps with openkim enabled
+      (import ./overlays/lammps.nix)
     ];
 
   in { 
@@ -53,11 +55,12 @@
     pkgs = import nixpkgs {
       inherit system;
       inherit overlays;
-      # config = {
-      #   allowUnfree = true;
-      #   cudaSupport = true;
-      #   cudaVersion = "12.6.0-v100";
-      # };
+      config = {
+        allowUnfree = true;
+        cudaSupport = true;
+        # cudaVersion = "12.6.0-v100";
+        cudaVersion = "12.6.0";
+      };
     };
   in {
     # system specific output
@@ -68,6 +71,7 @@
       inherit mrchem;
       inherit sirius;
       inherit umpire;
+      inherit lammps;
     };
     # defaultPackage = xxx;
 
@@ -84,8 +88,9 @@
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
-          sirius-python-interface
+          # sirius-python-interface
         ]))
+        lammps
       ];
 
       shellHook = ''
