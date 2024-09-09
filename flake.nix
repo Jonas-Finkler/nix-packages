@@ -16,6 +16,7 @@
       mrchem = pkgs.callPackage ./packages/mrchem {};
       sirius = pkgs.callPackage ./packages/sirius {};
       umpire = pkgs.callPackage ./packages/umpire {};
+      rmsd-finder = pkgs.callPackage ./packages/rmsd-finder {};
     };
 
     myPythonPackages = pkgs: python: {
@@ -71,6 +72,7 @@
       inherit mrchem;
       inherit sirius;
       inherit umpire;
+      inherit rmsd-finder;
       inherit lammps;
       inherit lammps-mpi;
     };
@@ -91,7 +93,7 @@
           # kimpy
           # sirius-python-interface
         ]))
-        lammps-mpi
+        rmsd-finder
       ];
 
       shellHook = ''
