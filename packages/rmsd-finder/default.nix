@@ -5,15 +5,15 @@
   gfortran,
   blas,
   lapack
-}: stdenv.mkDerivation {
+}: stdenv.mkDerivation rec {
 
   pname = "rmsd-finder";
-  version = "1.0.0";
+  version = "2.0.0";
   src = fetchFromGitHub {
     owner = "Jonas-Finkler";
     repo = "RMSD-finder";
-    rev = "v1.0.0";
-    sha256 = "sha256-tPsSfHRjSBNBxmQcJukpLXcGUMujv8+WIHsuDuyYN30=";
+    rev = "v${version}";
+    sha256 = "sha256-5k7g9gsHqeo3WKmAFcCRwgB8ESFpqtLz5WukCXPFWmY=";
   };
 
   nativeBuildInputs = [
