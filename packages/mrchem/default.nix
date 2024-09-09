@@ -13,15 +13,13 @@
   python3
 }: stdenv.mkDerivation {
   pname = "mrchem";
+  # this is Moritz Gubler's version with the improved force calculation
   version = "surface-forces-9408238";
   src = fetchFromGitHub {
     owner = "moritzgubler";
     repo = "mrchem";
     rev = "9408238bf3d75ca4e791afde3fb5cdce1d88de24";
     sha256 = "sha256-1XhPw/mfG5jG3cUIvyHLuJHHZ4MNkic9FrP8YoHP+08=";
-    # fetchSubmodules = true;
-    # deepClone = true;
-  
   };
   
   nativeBuildInputs = with pkgs; [

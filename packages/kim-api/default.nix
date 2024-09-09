@@ -13,13 +13,13 @@
   pkg-config,
   gfortran,
   makeWrapper
-}: stdenv.mkDerivation {
+}: stdenv.mkDerivation rec {
   pname = "kim-api";
   version = "2.3.0";
   src = fetchFromGitHub {
     owner = "openkim";
     repo = "kim-api";
-    rev = "v2.3.0";
+    rev = "v${version}";
     sha256 = "sha256-U438tEYg53QZ9apVPm9QwTRRbaTBT+pju2ct9dPSgao=";
     # fetchSubmodules = true;
     # deepClone = true;
