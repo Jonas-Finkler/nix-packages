@@ -7,4 +7,9 @@ final: prev: {
       final.kim-api
     ];
   };
+  lammps-mpi = final.lammps.override {
+    extraBuildInputs = final.lammps.extraBuildInputs ++ [
+      final.mpi
+    ];
+  };
 }

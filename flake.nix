@@ -72,6 +72,7 @@
       inherit sirius;
       inherit umpire;
       inherit lammps;
+      inherit lammps-mpi;
     };
     # defaultPackage = xxx;
 
@@ -90,7 +91,7 @@
           # kimpy
           # sirius-python-interface
         ]))
-        lammps
+        lammps-mpi
       ];
 
       shellHook = ''
