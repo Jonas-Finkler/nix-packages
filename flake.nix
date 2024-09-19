@@ -30,38 +30,48 @@
       sirius-python-interface = python.callPackage ./pythonPackages/sirius-python-interface {};
     };
 
-    overlays = [
-      # normal packages
+    # normal packages
+    packageOverlays = [
       (final: prev: 
         (myPackages final)
       )
-      # python packages
-      (final: prev: {
-        python311 = prev.python311.override {
-          packageOverrides = python-self: python-super: (myPythonPackages final python-self);
-        };
-        python312 = prev.python312.override {
-          packageOverrides = python-self: python-super: (myPythonPackages final python-self);
-        };
-      })
       # lammps with openkim enabled
       (import ./overlays/lammps.nix)
     ];
+
+    pythonOverlays = [
+      # python packages
+      (final: prev: {
+        python311 = prev.python311.override {
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+        };
+        python312 = prev.python312.override {
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+        };
+      })
+    ];
+
+    overlays = packageOverlays ++ pythonOverlays;
 
   in { 
     # basic flake output
     inherit overlays;
 
+    inherit packageOverlays;
+
+    pythonPackages = myPythonPackages;
+
   } // (flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs {
       inherit system;
       inherit overlays;
-      config = {
-        allowUnfree = true;
-        cudaSupport = true;
-        # cudaVersion = "12.6.0-v100";
-        cudaVersion = "12.6.0";
-      };
+      # # cuda
+      # config = {
+      #   allowUnfree = true;
+      #   cudaSupport = true;
+      #   cudaVersion = "12.6.0";
+      #   # cudaVersion = "12.6.0-v100";
+      # };
     };
   in {
     # system specific output
@@ -81,19 +91,19 @@
     # for testing that everything compiles
     devShells.default = pkgs.mkShell {
       buildInputs = with pkgs; [ 
-        # fhiaims
-        # runner
-        # kim-api
-        # mrchem
-        # sirius
-        # umpire
-        (python311.withPackages (p: with p; [
-          # sqnm
-          # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-          # kimpy
-          # sirius-python-interface
-        ]))
+        fhiaims
+        runner
+        kim-api
+        mrchem
+        sirius
+        umpire
         rmsd-finder
+        (python311.withPackages (p: with p; [
+          sqnm
+          ase-mh # there are some issues with the new ase version -> BE CAREFUL!
+          kimpy
+          sirius-python-interface
+        ]))
       ];
 
       shellHook = ''
