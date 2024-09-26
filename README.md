@@ -10,8 +10,8 @@ This is a collection of nix packages I curate for myself.
 - [mrchem](https://github.com/MRChemSoft/mrchem)
 - [rmsd-finder](https://github.com/Jonas-Finkler/RMSD-finder)
 - [lammps with openkim support](https://www.lammps.org)
-- [sirius](https://github.com/electronic-structure/SIRIUS) (Has been merged into nixpkgs)
-- [umpire][https://github.com/LLNL/Umpire] (Has been merged into nixpkgs)
+- [sirius](https://github.com/electronic-structure/SIRIUS) (Has been merged into [nixpkgs](https://github.com/NixOS/nixpkgs/pull/338395))
+- [umpire](https://github.com/LLNL/Umpire) (Has been merged into [nixpkgs](https://github.com/NixOS/nixpkgs/pull/338395))
 
 ### Python Packages
 - [sqnm](https://github.com/moritzgubler/vc-sqnm)
