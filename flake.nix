@@ -14,20 +14,22 @@
       mrcpp = pkgs.callPackage ./packages/mrcpp {};
       xcfun = pkgs.callPackage ./packages/xcfun {};
       mrchem = pkgs.callPackage ./packages/mrchem {};
-      sirius = pkgs.callPackage ./packages/sirius {};
-      umpire = pkgs.callPackage ./packages/umpire {};
       rmsd-finder = pkgs.callPackage ./packages/rmsd-finder {};
+      # Those have been merged into nixpkgs
+      # sirius = pkgs.callPackage ./packages/sirius {};
+      # umpire = pkgs.callPackage ./packages/umpire {};
     };
 
     myPythonPackages = pkgs: python: {
       sqnm = python.callPackage ./pythonPackages/sqnm {};
       ase-mh = python.callPackage ./pythonPackages/ase-mh {};
       kimpy = python.callPackage ./pythonPackages/kimpy {};
-      sirius = python.toPythonModule (pkgs.sirius.override {
-        enablePython = true; 
-        pythonPackages = python.pythonPackages;
-      });
+      # sirius = python.toPythonModule (pkgs.sirius.override {
+      #   enablePython = true; 
+      #   pythonPackages = python.pythonPackages;
+      # });
       sirius-python-interface = python.callPackage ./pythonPackages/sirius-python-interface {};
+      torch-nl = python.callPackage ./pythonPackages/torch-nl {};
     };
 
     # normal packages
@@ -80,7 +82,7 @@
       inherit runner;
       inherit kim-api;
       inherit mrchem;
-      inherit sirius;
+      # inherit sirius;
       inherit umpire;
       inherit rmsd-finder;
       inherit lammps;
@@ -95,7 +97,7 @@
         runner
         kim-api
         mrchem
-        sirius
+        sirius # from nixpkgs
         umpire
         rmsd-finder
         (python311.withPackages (p: with p; [
@@ -103,6 +105,7 @@
           ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           kimpy
           sirius-python-interface
+          torch-nl
         ]))
       ];
 
