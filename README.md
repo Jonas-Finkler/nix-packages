@@ -9,6 +9,7 @@ This is a collection of nix packages I curate for myself.
 - [xcfun](https://github.com/dftlibs/xcfun)
 - [mrchem](https://github.com/MRChemSoft/mrchem)
 - [rmsd-finder](https://github.com/Jonas-Finkler/RMSD-finder)
+- [lammps with openkim support](https://www.lammps.org)
 - [sirius](https://github.com/electronic-structure/SIRIUS) (Has been merged into nixpkgs)
 - [umpire][https://github.com/LLNL/Umpire] (Has been merged into nixpkgs)
 
