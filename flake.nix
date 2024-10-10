@@ -15,6 +15,7 @@
       xcfun = pkgs.callPackage ./packages/xcfun {};
       mrchem = pkgs.callPackage ./packages/mrchem {};
       rmsd-finder = pkgs.callPackage ./packages/rmsd-finder {};
+      sw = pkgs.callPackage ./packages/sw {};
       # Those have been merged into nixpkgs
       # sirius = pkgs.callPackage ./packages/sirius {};
       # umpire = pkgs.callPackage ./packages/umpire {};
@@ -50,6 +51,9 @@
         python312 = prev.python312.override {
           packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
         };
+        python313 = prev.python313.override {
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+        };
       })
     ];
 
@@ -82,30 +86,33 @@
       inherit runner;
       inherit kim-api;
       inherit mrchem;
-      # inherit sirius;
+      # inherit sirius;  # merged
       inherit umpire;
       inherit rmsd-finder;
       inherit lammps;
       inherit lammps-mpi;
+      inherit sw;
     };
     # defaultPackage = xxx;
 
     # for testing that everything compiles
     devShells.default = pkgs.mkShell {
       buildInputs = with pkgs; [ 
-        fhiaims
-        runner
-        kim-api
-        mrchem
-        sirius # from nixpkgs
-        umpire
-        rmsd-finder
+        # fhiaims
+        # runner
+        # kim-api
+        # mrchem
+        # # sirius # from nixpkgs
+        # umpire
+        # rmsd-finder
+        sw
         (python311.withPackages (p: with p; [
-          sqnm
-          ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-          kimpy
-          sirius-python-interface
-          torch-nl
+          # sqnm
+          # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
+          # kimpy
+          # sirius-python-interface
+          # torch-nl
+          # sw
         ]))
       ];
 
