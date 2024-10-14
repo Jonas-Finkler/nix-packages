@@ -25,6 +25,8 @@
       sqnm = python.callPackage ./pythonPackages/sqnm {};
       ase-mh = python.callPackage ./pythonPackages/ase-mh {};
       kimpy = python.callPackage ./pythonPackages/kimpy {};
+
+      # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
       #   enablePython = true; 
       #   pythonPackages = python.pythonPackages;
@@ -98,6 +100,8 @@
     # for testing that everything compiles
     devShells.default = pkgs.mkShell {
       buildInputs = with pkgs; [ 
+        # lammps
+        # lammps-mpi
         # fhiaims
         # runner
         # kim-api
@@ -105,13 +109,13 @@
         # # sirius # from nixpkgs
         # umpire
         # rmsd-finder
-        sw
+        # sw
         (python311.withPackages (p: with p; [
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
           # sirius-python-interface
-          # torch-nl
+          torch-nl
           # sw
         ]))
       ];

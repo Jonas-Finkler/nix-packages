@@ -8,7 +8,8 @@
   numpy, 
   torch,
   pytest,
-  black
+  black,
+  pytestCheckHook
 }: buildPythonPackage rec {
   pname = "torch-nl";
   version = "0.3";
@@ -19,6 +20,10 @@
     hash = "sha256-LJIJNqcDe83cs8gN2Pv8xmOkmyDMqKrNhYYd/9qSaVM=";
   };
   format = "pyproject";
+
+  testInputs = [
+    pytestCheckHook
+  ];
   
   buildInputs = [
     setuptools
@@ -30,8 +35,8 @@
     ase
     numpy
     torch
-    pytest
     black
+    pytest # NOTE: Should not be a runtime dependency but thats how it is in upstream
   ];
   
 }
