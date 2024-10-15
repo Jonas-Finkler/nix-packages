@@ -26,6 +26,7 @@
       ase-mh = python.callPackage ./pythonPackages/ase-mh {};
       kimpy = python.callPackage ./pythonPackages/kimpy {};
       torch-geometric = python.callPackage ./pythonPackages/torch-geometric {};
+      torch-scatter = python.callPackage ./pythonPackages/torch-scatter {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -118,6 +119,7 @@
           # sirius-python-interface
           # torch-nl
           torch-geometric
+          torch-scatter
           # sw
         ]))
       ];
