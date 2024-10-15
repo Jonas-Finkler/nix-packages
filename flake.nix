@@ -25,6 +25,7 @@
       sqnm = python.callPackage ./pythonPackages/sqnm {};
       ase-mh = python.callPackage ./pythonPackages/ase-mh {};
       kimpy = python.callPackage ./pythonPackages/kimpy {};
+      torch-geometric = python.callPackage ./pythonPackages/torch-geometric {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -115,7 +116,8 @@
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
           # sirius-python-interface
-          torch-nl
+          # torch-nl
+          torch-geometric
           # sw
         ]))
       ];
