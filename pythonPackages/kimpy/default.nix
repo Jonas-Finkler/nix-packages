@@ -5,43 +5,47 @@
   setuptools,
   pybind11,
   kim-api,
-  numpy
-}: buildPythonPackage {
+  numpy,
+  pytestCheckHook,
+  ase
+}: buildPythonPackage rec {
+
   pname = "kimpy";
   version = "2.1.1";
+
   src = fetchFromGitHub {
     owner = "openkim";
     repo = "kimpy";
-    rev = "v2.1.1";
-    sha256 = "sha256-GTy0HtukUSQl/DseGZklt4XnzsWdBL0MvU+jW9g47/8=";
-    # fetchSubmodules = true;
-    # deepClone = true;
+    rev = "v${version}";
+    hash = "sha256-GTy0HtukUSQl/DseGZklt4XnzsWdBL0MvU+jW9g47/8=";
   };
+
   format = "pyproject";
+
+  pythonImportsCheck = [ "kimpy" ];
   
-  nativeBuildInputs = [
-    # needs to be placed in nativeBIs to work (hooks?)
-    pkg-config
+  # pytest adds pwd to path, causing import errors
+  # https://github.com/NixOS/nixpkgs/issues/255262
+  preCheck = ''
+    cd tests
+  '';
+
+  nativeCheckInputs = [ 
+    pytestCheckHook 
+    ase
   ];
-  
-  buildInputs = [
+
+  nativeBuildInputs = [
+    pkg-config
     setuptools
   ];
   
-  propagatedBuildInputs = [
+  buildInputs = [
     pybind11
     kim-api
-    numpy
   ];
   
-  # preBuild = ''
-  #   export PKG_CONFIG_PATH="${kim-api}/lib/pkgconfig:"
-  # '';
-  
-  # prePatch = ''
-  #   substituteInPlace setup.py \
-  #     --replace 'pkg-config' '${pkgs.pkg-config}/bin/pkg-config'
-  # '';
-  
-  # doCheck = false;
+  propagatedBuildInputs = [
+    numpy
+  ];
 }
