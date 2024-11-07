@@ -27,6 +27,7 @@
       kimpy = python.callPackage ./pythonPackages/kimpy {};
       torch-geometric = python.callPackage ./pythonPackages/torch-geometric {};
       torch-scatter = python.callPackage ./pythonPackages/torch-scatter {};
+      vitrum = python.callPackage ./pythonPackages/vitrum {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -96,6 +97,27 @@
       inherit lammps;
       inherit lammps-mpi;
       inherit sw;
+      singularityContainer = pkgs.singularity-tools.buildImage {
+        name = "fhi-aims";
+        contents = (with pkgs; [
+          coreutils-full # provides ls, cat, ...
+          fhiaims
+        ]);
+        # the shadowSetup creates passwd and group files to prevent singularity from complaining
+        runAsRoot = ''
+          #!${pkgs.stdenv.shell}
+          ${pkgs.dockerTools.shadowSetup} 
+        '';
+        # drop into shell by default
+        runScript = ''
+          #!${pkgs.stdenv.shell}
+          # export CC=${pkgs.cudaPackages.backendStdenv.cc}/bin/cc;
+          # export CXX=${pkgs.cudaPackages.backendStdenv.cc}/bin/c++;
+          exec /bin/sh $@"
+        '';
+        diskSize = 1024 * 40;
+        memSize = 1024 * 8;
+      };
     };
     # defaultPackage = xxx;
 
@@ -115,11 +137,12 @@
         (python311.withPackages (p: with p; [
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-          # kimpy
+          kimpy
           # sirius-python-interface
           # torch-nl
-          torch-geometric
-          torch-scatter
+          # torch-geometric
+          # torch-scatter
+          vitrum
           # sw
         ]))
       ];
