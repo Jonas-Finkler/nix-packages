@@ -8,7 +8,7 @@
 , copyDesktopItems
 , runtimeShell
 , unzip
-, wrapGAppsHook
+, wrapGAppsHook3
 }:
 
 stdenv.mkDerivation rec {
@@ -22,7 +22,14 @@ stdenv.mkDerivation rec {
 
   dontBuild = true;
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper copyDesktopItems unzip wrapGAppsHook ];
+  nativeBuildInputs = [ 
+    autoPatchelfHook 
+    makeWrapper 
+    copyDesktopItems 
+    unzip 
+    wrapGAppsHook3 
+  ];
+
   buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   desktopItems = [
