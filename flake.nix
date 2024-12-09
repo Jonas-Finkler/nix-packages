@@ -16,26 +16,28 @@
       mrchem = pkgs.callPackage ./packages/mrchem {};
       rmsd-finder = pkgs.callPackage ./packages/rmsd-finder {};
       sw = pkgs.callPackage ./packages/sw {};
+      fiji = pkgs.callPackage ./packages/fiji {};
       # Those have been merged into nixpkgs
       # sirius = pkgs.callPackage ./packages/sirius {};
       # umpire = pkgs.callPackage ./packages/umpire {};
     };
 
-    myPythonPackages = pkgs: python: {
-      sqnm = python.callPackage ./pythonPackages/sqnm {};
-      ase-mh = python.callPackage ./pythonPackages/ase-mh {};
-      kimpy = python.callPackage ./pythonPackages/kimpy {};
-      torch-geometric = python.callPackage ./pythonPackages/torch-geometric {};
-      torch-scatter = python.callPackage ./pythonPackages/torch-scatter {};
-      vitrum = python.callPackage ./pythonPackages/vitrum {};
+    myPythonPackages = pkgs: python-final: python-prev: {
+      sqnm = python-final.callPackage ./pythonPackages/sqnm {};
+      ase-mh = python-final.callPackage ./pythonPackages/ase-mh {};
+      kimpy = python-final.callPackage ./pythonPackages/kimpy {};
+      torch-geometric = python-final.callPackage ./pythonPackages/torch-geometric {};
+      torch-scatter = python-final.callPackage ./pythonPackages/torch-scatter {};
+      vitrum = python-final.callPackage ./pythonPackages/vitrum {}; # NOTE: Misses dependencies
+      lammps = python-prev.lammps.overrideAttrs {lammps = pkgs.lammps-mpi; };
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
       #   enablePython = true; 
       #   pythonPackages = python.pythonPackages;
       # });
-      sirius-python-interface = python.callPackage ./pythonPackages/sirius-python-interface {};
-      torch-nl = python.callPackage ./pythonPackages/torch-nl {};
+      sirius-python-interface = python-final.callPackage ./pythonPackages/sirius-python-interface {};
+      torch-nl = python-final.callPackage ./pythonPackages/torch-nl {};
     };
 
     # normal packages
@@ -51,13 +53,13 @@
       # python packages
       (final: prev: {
         python311 = prev.python311.override {
-          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final python-prev);
         };
         python312 = prev.python312.override {
-          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final python-prev);
         };
         python313 = prev.python313.override {
-          packageOverrides = python-final: python-prev: (myPythonPackages final python-final);
+          packageOverrides = python-final: python-prev: (myPythonPackages final python-final python-prev);
         };
       })
     ];
@@ -134,16 +136,18 @@
         # umpire
         # rmsd-finder
         # sw
+        fiji
         (python311.withPackages (p: with p; [
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
-          kimpy
+          # kimpy
           # sirius-python-interface
           # torch-nl
           # torch-geometric
           # torch-scatter
-          vitrum
+          # vitrum
           # sw
+          # lammps
         ]))
       ];
 
