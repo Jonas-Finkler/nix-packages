@@ -16,7 +16,7 @@
       mrchem = pkgs.callPackage ./packages/mrchem {};
       rmsd-finder = pkgs.callPackage ./packages/rmsd-finder {};
       sw = pkgs.callPackage ./packages/sw {};
-      fiji = pkgs.callPackage ./packages/fiji {};
+      # fiji = pkgs.callPackage ./packages/fiji {}; # has been merged https://github.com/NixOS/nixpkgs/pull/363577
       # Those have been merged into nixpkgs
       # sirius = pkgs.callPackage ./packages/sirius {};
       # umpire = pkgs.callPackage ./packages/umpire {};
@@ -136,9 +136,9 @@
         # umpire
         # rmsd-finder
         # sw
-        fiji
+        # fiji
         (python311.withPackages (p: with p; [
-          # sqnm
+          sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
           # sirius-python-interface
