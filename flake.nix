@@ -38,6 +38,7 @@
       # });
       sirius-python-interface = python-final.callPackage ./pythonPackages/sirius-python-interface {};
       torch-nl = python-final.callPackage ./pythonPackages/torch-nl {};
+      msdnet = python-final.callPackage ./pythonPackages/msdnet {};
     };
 
     # normal packages
@@ -138,7 +139,7 @@
         # sw
         # fiji
         (python311.withPackages (p: with p; [
-          sqnm
+          # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
           # sirius-python-interface
@@ -148,6 +149,7 @@
           # vitrum
           # sw
           # lammps
+          msdnet
         ]))
       ];
 
