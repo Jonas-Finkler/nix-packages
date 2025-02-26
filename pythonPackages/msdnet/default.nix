@@ -26,8 +26,8 @@
   src = fetchFromGitHub {
     owner = "Jonas-Finkler";
     repo = "msdnet";
-    rev = "75fe55db2f164eb793ab5dbdac3506bc0ff774ea";
-    sha256 = "sha256-IlP6fys3ofBagYoaBaljvyAk7eTqipK6BOG7ZnlVaJA=";
+    rev = "8d727708e7531f41262c88368a777091afe8a072";
+    sha256 = "sha256-hqsmzSmAMDiykmBlG32xw3NjSSuRpbj/WepuGCCjK/4=";
     # fetchSubmodules = true;
     # deepClone = true;
   };
