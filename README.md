@@ -20,3 +20,4 @@ This is a collection of nix packages I curate for myself.
 - [sirius](https://github.com/electronic-structure/SIRIUS)
 - [sirius-python-interface](https://github.com/moritzgubler/sirius-python-interface)
 - [torch-nl](https://github.com/felixmusil/torch_nl/tree/main)
+- [alpaca-py](https://github.com/alpacahq/alpaca-py)
