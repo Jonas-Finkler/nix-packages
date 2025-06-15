@@ -30,7 +30,7 @@
       torch-scatter = python-final.callPackage ./pythonPackages/torch-scatter {};
       vitrum = python-final.callPackage ./pythonPackages/vitrum {}; # NOTE: Misses dependencies
       lammps = python-prev.lammps.overrideAttrs {lammps = pkgs.lammps-mpi; };
-      alpaca = python-final.callPackage ./pythonPackages/alpaca {};
+      alpaca-py = python-final.callPackage ./pythonPackages/alpaca-py {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -150,7 +150,7 @@
           # vitrum
           # sw
           # lammps
-          alpaca
+          alpaca-py
         ]))
       ];
 
