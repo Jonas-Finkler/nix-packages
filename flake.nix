@@ -31,6 +31,7 @@
       vitrum = python-final.callPackage ./pythonPackages/vitrum {}; # NOTE: Misses dependencies
       lammps = python-prev.lammps.overrideAttrs {lammps = pkgs.lammps-mpi; };
       alpaca-py = python-final.callPackage ./pythonPackages/alpaca-py {};
+      pyfai = python-final.callPackage ./pythonPackages/pyfai {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -139,7 +140,7 @@
         # rmsd-finder
         # sw
         # fiji
-        (python311.withPackages (p: with p; [
+        (python312.withPackages (p: with p; [
           # sqnm
           # ase-mh # there are some issues with the new ase version -> BE CAREFUL!
           # kimpy
@@ -150,7 +151,8 @@
           # vitrum
           # sw
           # lammps
-          alpaca-py
+          # alpaca-py
+          pyfai
         ]))
       ];
 
