@@ -38,10 +38,6 @@
   format = "pyproject";
   # dontUseCmakeConfigure = true;
 
-  # patchPhase = ''
-  #   substituteInPlace meson.build \
-  #     --replace './version.py --wheel' 'python version.py --wheel'
-  # '';
   patchPhase = ''
     patchShebangs version.py
   '';
@@ -56,11 +52,6 @@
     python
   ];
 
-  # buildInputs = [
-  #   cmake
-  #   scikit-build
-  # ];
-
   propagatedBuildInputs = [
     numpy
     h5py
@@ -69,7 +60,6 @@
     scipy
     numexpr
     matplotlib
-
   ];
 
   # doCheck = false;

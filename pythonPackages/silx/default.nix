@@ -7,6 +7,7 @@
   packaging,
   meson-python,
   cython,
+  setuptools,
 }: buildPythonPackage rec {
   pname = "silx";
   version = "2.2.2";
@@ -22,7 +23,7 @@
     owner = "silx-kit";
     repo = "silx";
     rev = "v${version}";
-    sha256 = "";
+    sha256 = "sha256-rhhlqqdtdRV0/g5FdT+6kU3y8WRFT37fQ4VrGfkYXac=";
     # fetchSubmodules = true;
     # deepClone = true;
   };
@@ -34,6 +35,7 @@
   nativeBuildInputs = [
     meson-python
     cython
+    setuptools
     # oldest-supported-numpy
     # python
   ];
