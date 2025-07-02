@@ -32,6 +32,7 @@
       lammps = python-prev.lammps.overrideAttrs {lammps = pkgs.lammps-mpi; };
       alpaca-py = python-final.callPackage ./pythonPackages/alpaca-py {};
       pyfai = python-final.callPackage ./pythonPackages/pyfai {};
+      silx = python-final.callPackage ./pythonPackages/silx {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -153,6 +154,7 @@
           # lammps
           # alpaca-py
           pyfai
+          # silx
         ]))
       ];
 
