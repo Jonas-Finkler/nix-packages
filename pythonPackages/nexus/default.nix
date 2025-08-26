@@ -28,9 +28,11 @@
   # };
   src = fetchgit {
     url = "https://codebase.helmholtz.cloud/DAPHNE4NFDI/nuclear-nexus.git";
-    rev = "v${version}";
+    # rev = "v${version}";
+    rev = "b9c708c8dbe11407980c0829550118b4aba13671";
     # sha256 = "sha256-fn3FnxJ/g8uryiHWz0Z3qLho57zf/smNRfnxRv61kOk="; # 1.1.1
-    sha256 = "sha256-p70RCLsNJ7K7/URuk6HSJWW+7tZojIVDIgQKz8FkjkM="; # 1.2.0
+    # sha256 = "sha256-p70RCLsNJ7K7/URuk6HSJWW+7tZojIVDIgQKz8FkjkM="; # 1.2.0
+    sha256 = "sha256-08uVzZBxW7ZFkr8EBCQi/uZYFcW/7CUHbPRrbx34yDY=";
   };
   format = "pyproject";
   
