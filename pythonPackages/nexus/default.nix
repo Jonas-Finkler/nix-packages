@@ -16,7 +16,7 @@
   pybaselines,
 }: buildPythonPackage rec {
   pname = "nexus";
-  version = "1.2.0";
+  version = "latest_26.08.2025";
   # src = fetchFromGitLab {
   #   # https://codebase.helmholtz.cloud/DAPHNE4NFDI/nuclear-nexus.git
   #   owner = "DAPHNE4NFDI";
