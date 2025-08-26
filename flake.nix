@@ -33,6 +33,8 @@
       alpaca-py = python-final.callPackage ./pythonPackages/alpaca-py {};
       pyfai = python-final.callPackage ./pythonPackages/pyfai {};
       silx = python-final.callPackage ./pythonPackages/silx {};
+      nexus = python-final.callPackage ./pythonPackages/nexus {};
+      pybaselines = python-final.callPackage ./pythonPackages/pybaselines {};
 
       # merged
       # sirius = python.toPythonModule (pkgs.sirius.override {
@@ -153,8 +155,9 @@
           # sw
           # lammps
           # alpaca-py
-          pyfai
           # silx
+          nexus
+          # pyfai
         ]))
       ];
 
