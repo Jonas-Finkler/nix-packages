@@ -1,4 +1,5 @@
 {
+  lib,
   buildPythonPackage,
   fetchgit,
   numpy,
@@ -14,18 +15,16 @@
   ceres-solver,
   cmake,
   pybaselines,
+  pagmo2,
+  pygmo,
+  nlopt,
+  boost,
+  tbb,
+  ipopt,
 }: buildPythonPackage rec {
   pname = "nexus";
   version = "latest_26.08.2025";
-  # src = fetchFromGitLab {
-  #   # https://codebase.helmholtz.cloud/DAPHNE4NFDI/nuclear-nexus.git
-  #   owner = "DAPHNE4NFDI";
-  #   repo = "nuclear-nexus";
-  #   rev = "4f170bb1"; #"v${version}";
-  #   sha256 = "";
-  #   # fetchSubmodules = true;
-  #   # deepClone = true;
-  # };
+
   src = fetchgit {
     url = "https://codebase.helmholtz.cloud/DAPHNE4NFDI/nuclear-nexus.git";
     # rev = "v${version}";
@@ -38,6 +37,15 @@
   
   dontUseCmakeConfigure = true;
 
+  mesonFlags = [
+    # those should be on by default if dependencies are found but it is useful for testing to force it
+    "-Dpagmo=enabled"
+    "-Dnlopt=enabled" 
+    "--wrap-mode=nofallback" # don't try to download dependencies
+    # This path is not included by default causing error when including pagmo
+    "-Dc_args=-I${ipopt}/include/coin-or"
+  ];
+
   nativeBuildInputs = [
     ninja
     meson
@@ -47,16 +55,31 @@
     pkg-config
     cmake
   ];
-  
+
+  buildInputs = [
+    eigen
+    ceres-solver
+    nlopt
+    tbb
+    pagmo2
+    pygmo
+    boost
+    ipopt
+  ];
+
   propagatedBuildInputs = [
     numpy
     scipy
     matplotlib
-    eigen
-    ceres-solver
     pybaselines
   ];
-  
-  # doCheck = false;
+
+  meta = with lib; {
+    description = "Nexus is a flexible and performant package to simulate and fit Moessbauer and nuclear resonant scattering experiments while offering an easy to use Python interface to set up the calculations.";
+    homepage = "https://fs-mcp.pages.desy.de/nuclear-nexus/index.html";
+    license = licenses.gpl3;
+    maintainers = with maintainers; [ ];
+  };
+
 }
   

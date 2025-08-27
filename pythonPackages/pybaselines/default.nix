@@ -16,7 +16,6 @@ buildPythonPackage rec {
     repo = "pybaselines";
     rev = "v${version}";
     sha256 = "sha256-Gj0vEBVBsixA1dY0LpcbgsguTUY2TVgOzvAqY+vkpGM=";
-    # Replace with real hash: nix-prefetch-url --unpack https://github.com/derb12/pybaselines/archive/refs/tags/v${version}.tar.gz
   };
 
   format = "pyproject";
@@ -31,11 +30,6 @@ buildPythonPackage rec {
     hatch-vcs
   ];
 
-  # Optional dependencies: numba, pentapy, etc.
-  # propagatedBuildInputs = [ numpy scipy numba pentapy ];
-
-  # Sometimes tests pull in extra deps → disable if needed:
-  # doCheck = false;
 
   meta = with lib; {
     description = "Library of algorithms for baseline correction of experimental data";
